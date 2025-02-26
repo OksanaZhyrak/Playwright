@@ -7,6 +7,7 @@ def test_tabs(page: Page):
     nomads.open()
     context = page.context  # Отримуємо контекст з поточної сторінки
     nomads.open_in_new_tab(context)  # Відкриваємо нову вкладку і отримуємо її
+    print ('Hello world')
 
 
 
