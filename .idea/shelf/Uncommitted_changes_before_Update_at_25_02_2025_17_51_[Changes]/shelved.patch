@@ -1,0 +1,469 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1735661773624)
++++ b/.idea/misc.xml	(date 1735661773624)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Black">
++    <option name="sdkName" value="Python 3.13 (PythonProject2)" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/profiles_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/profiles_settings.xml b/.idea/inspectionProfiles/profiles_settings.xml
+new file mode 100644
+--- /dev/null	(date 1735661419960)
++++ b/.idea/inspectionProfiles/profiles_settings.xml	(date 1735661419960)
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="USE_PROJECT_PROFILE" value="false" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1735661419952)
++++ b/.idea/modules.xml	(date 1735661419952)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/PythonProject2.iml" filepath="$PROJECT_DIR$/.idea/PythonProject2.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1735661420068)
++++ b/.idea/.gitignore	(date 1735661420068)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1740394811869)
++++ b/.idea/vcs.xml	(date 1740394811869)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.name
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.name b/.idea/.name
+new file mode 100644
+--- /dev/null	(date 1735661926573)
++++ b/.idea/.name	(date 1735661926573)
+@@ -0,0 +1,1 @@
++test_buttons.py
+\ No newline at end of file
+Index: pages/simple_page.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pages/simple_page.py b/pages/simple_page.py
+new file mode 100644
+--- /dev/null	(date 1735898134520)
++++ b/pages/simple_page.py	(date 1735898134520)
+@@ -0,0 +1,23 @@
++from playwright.sync_api import expect
++from pages.base_page import BasePage
++
++
++BUTTON = '#submit-id-submit'
++RESULT = '#result-text'
++
++class SimplePage(BasePage):
++    url = 'https://www.qa-practice.com/elements/button/simple'
++
++    def check_button_exists(self):
++        button = self.page.locator(BUTTON)
++        expect(button).to_be_visible()
++
++    def click_button(self):
++        button = self.page.locator(BUTTON)
++        button.click()
++
++    def check_result_text_is_(self, text):
++        result = self.page.locator(RESULT)
++        # Чекаємо, поки елемент стане видимим
++        result.wait_for(state="visible", timeout=10000)
++        expect(result).to_have_text(text)
+\ No newline at end of file
+Index: pages/looks_like_a_button_page.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pages/looks_like_a_button_page.py b/pages/looks_like_a_button_page.py
+new file mode 100644
+--- /dev/null	(date 1735898134509)
++++ b/pages/looks_like_a_button_page.py	(date 1735898134509)
+@@ -0,0 +1,23 @@
++from playwright.sync_api import expect
++from pages.base_page import BasePage
++
++
++BUTTON = '.a-button'
++RESULT = '#result-text'
++
++class LooksLikeAButtonP(BasePage):
++    url = 'https://www.qa-practice.com/elements/button/like_a_button'
++
++    def check_button_visible(self):
++        button = self.page.locator(BUTTON)
++        expect(button).to_be_visible()
++
++    def click_button(self):
++        button = self.page.locator(BUTTON)
++        button.click()
++
++    def check_result_text_is_(self, text):
++        result = self.page.locator(RESULT)
++        # Чекаємо, поки елемент стане видимим
++        result.wait_for(state="visible", timeout=10000)
++        expect(result).to_have_text(text)
+Index: tests/test_alerts.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tests/test_alerts.py b/tests/test_alerts.py
+new file mode 100644
+--- /dev/null	(date 1735916800909)
++++ b/tests/test_alerts.py	(date 1735916800909)
+@@ -0,0 +1,17 @@
++from playwright.sync_api import Page
++from pages.demoblaze_alert_page import DemoblazeAlertPage
++
++
++
++def test_alert(page: Page):
++    demoblaze_alert = DemoblazeAlertPage(page)
++    demoblaze_alert.open()
++    demoblaze_alert.catch_dialog()
++    demoblaze_alert.click_on_product()
++    demoblaze_alert.click_add_to_cart()
++    demoblaze_alert.wait_for_dialog()
++    demoblaze_alert.click_cart_button()
++
++
++
++
+Index: pages/demoblaze_alert_page.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pages/demoblaze_alert_page.py b/pages/demoblaze_alert_page.py
+new file mode 100644
+--- /dev/null	(date 1735915986497)
++++ b/pages/demoblaze_alert_page.py	(date 1735915986497)
+@@ -0,0 +1,46 @@
++from asyncio import wait_for
++
++from playwright.sync_api import Dialog
++from pyexpat.errors import messages
++
++
++
++from pages.base_page import BasePage
++
++
++BUTTON = '#cartur'
++
++class DemoblazeAlertPage(BasePage):
++    url = 'https://www.demoblaze.com/'
++
++    def click_on_product(self):
++        product_button = self.page.get_by_role('link', name='Samsung galaxy s6')
++        product_button.click()
++
++    def click_add_to_cart(self):
++        add_to_cart_button = self.page.get_by_role('link', name='Add to cart')
++        add_to_cart_button.click()
++
++    def click_cart_button(self):
++        cart_button =self.page.locator(BUTTON)
++        cart_button.click()
++
++    def catch_dialog(self):
++
++        # Описуємо функцію для обробки алерта
++        def accept_alert(alert: Dialog):
++            print(f"Alert message: {alert.message}")  # Виведення повідомлення алерта
++            alert.accept()
++        self.page.on('dialog',accept_alert)# Реєстрація обробника події 'dialog'
++        # Викликаємо alert (цей код можна адаптувати під вашу сторінку)
++        self.page.evaluate("alert('This is an alert message!')")
++        # Очікуємо, поки алерт з'явиться і буде оброблений
++        #self.page.wait_for_event('dialog')
++
++
++    def wait_for_dialog(self):
++        self.page.wait_for_event('dialog')
++
++
++
++
+Index: tests/test_tabs.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tests/test_tabs.py b/tests/test_tabs.py
+new file mode 100644
+--- /dev/null	(date 1735923576371)
++++ b/tests/test_tabs.py	(date 1735923576371)
+@@ -0,0 +1,13 @@
++from playwright.sync_api import Page
++from pages.new_tab_example_page import NewTabExamplePage
++
++
++def test_tabs(page: Page):
++    nomads = NewTabExamplePage(page)
++    nomads.open()
++    context = page.context  # Отримуємо контекст з поточної сторінки
++    nomads.open_in_new_tab(context)  # Відкриваємо нову вкладку і отримуємо її
++
++
++
++
+Index: pages/new_tab_example_page.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pages/new_tab_example_page.py b/pages/new_tab_example_page.py
+new file mode 100644
+--- /dev/null	(date 1736269250929)
++++ b/pages/new_tab_example_page.py	(date 1736269250929)
+@@ -0,0 +1,16 @@
++from playwright.sync_api import BrowserContext
++
++from pages.base_page import BasePage
++
++
++class NewTabExamplePage(BasePage):
++    url = 'https://nomads.com/'
++
++    def open_in_new_tab(self, context: BrowserContext):
++        with context.expect_page() as new_tab_event:
++            self.page.get_by_alt_text('Get insured').click()
++            new_tab = new_tab_event.value
++            new_tab.wait_for_load_state('load')  # Wait for the page to load
++            new_tab.locator(r'body > div.relative.bg-white > div.bg-fountain-400 > section > div > div.pointer-events-none.mb-10.flex.flex-col.items-start.gap-2.sm\:gap-4.xl\:flex-row.xl\:items-center.xl\:gap-2 > a.group.relative.isolate.inline-flex.cursor-pointer.items-center.justify-center.border-\[1\.5px\].font-medium.rounded-\[--btn-rounded\].focus-visible\:outline-bluewood.focus\:outline-none.focus-visible\:outline.focus-visible\:outline-2.focus-visible\:outline-offset-2.after\:absolute.after\:inset-0.after\:-z-10.after\:rounded-\[--btn-rounded\].after\:hover\:bg-white\/\[5\%\].transition.active\:scale-\[0\.97\].border-confetti-600.bg-confetti-500.text-bluewood.shadow-\[shadow\:inset_0_1\.5px_theme\(colors\.white\/15\%\)\].gap-x-2.px-\[calc\(theme\(spacing\[4\]\)-1\.5px\)\].py-\[calc\(theme\(spacing\[3\]\)-1\.5px\)\].text-base.\[--btn-rounded\:theme\(borderRadius\.xl\)\].\[\&\>\[data-slot\=spinner\]\]\:size-5.\[\&\>svg\]\:size-6.pointer-events-auto.sm\:text-lg').click()
++            #new_tab.locator("xpath=/html/body/div[4]/div[1]/section/div/div[3]/a[1]").click()
++
+Index: conftest.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/conftest.py b/conftest.py
+new file mode 100644
+--- /dev/null	(date 1739553249078)
++++ b/conftest.py	(date 1739553249078)
+@@ -0,0 +1,15 @@
++import pytest
++import time
++from playwright.sync_api import sync_playwright, Page, BrowserContext
++
++@pytest.fixture()
++def page():
++    with sync_playwright() as p:
++        browser = p.chromium.launch(headless=False)  # Запуск браузера в не headless режимі
++        context: BrowserContext = browser.new_context()  # Створення нового контексту
++        page: Page = context.new_page()  # Створення нової сторінки
++        page.set_viewport_size({'height': 1080, 'width': 1920})  # Налаштування розміру екрану
++        time.sleep(1)  # Додаємо затримку в 1 секунд
++        yield page  # Повертаємо сторінку для використання в тестах
++        time.sleep(1)  # Додаємо затримку перед закриттям браузера
++        browser.close()  # Закриваємо браузер після тесту
+Index: tests/test_like_a_button.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tests/test_like_a_button.py b/tests/test_like_a_button.py
+new file mode 100644
+--- /dev/null	(date 1735836420694)
++++ b/tests/test_like_a_button.py	(date 1735836420694)
+@@ -0,0 +1,14 @@
++from playwright.sync_api import Page
++from pages.looks_like_a_button_page import LooksLikeAButtonP
++
++
++def test_simple_exist(page: Page):
++    looks_like_a_button = LooksLikeAButtonP(page)
++    looks_like_a_button.open()
++    looks_like_a_button.check_button_visible()
++
++def test_simple_click(page: Page):
++    looks_like_a_button = LooksLikeAButtonP(page)
++    looks_like_a_button.open()
++    looks_like_a_button.click_button()
++    looks_like_a_button.check_result_text_is_('Submitted')
+Index: tests/test_simple.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tests/test_simple.py b/tests/test_simple.py
+new file mode 100644
+--- /dev/null	(date 1735897643476)
++++ b/tests/test_simple.py	(date 1735897643476)
+@@ -0,0 +1,13 @@
++from playwright.sync_api import Page
++from pages.simple_page import SimplePage
++
++def test_simple_exist(page: Page):
++    simple_page = SimplePage(page)
++    simple_page.open()
++    simple_page.check_button_exists()
++
++def test_simple_click(page: Page):
++    simple_page = SimplePage(page)
++    simple_page.open()
++    simple_page.click_button()
++    simple_page.check_result_text_is_('Submitted')
+Index: pages/iframe_page.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pages/iframe_page.py b/pages/iframe_page.py
+new file mode 100644
+--- /dev/null	(date 1739121293961)
++++ b/pages/iframe_page.py	(date 1739121293961)
+@@ -0,0 +1,14 @@
++from pages.base_page import BasePage
++
++
++class IFramePage(BasePage):
++    url = 'https://www.qa-practice.com/elements/iframe/iframe_page'
++
++
++    def click_on_burger_menu(self):
++        #self.page.frame_locator('iframe').locator('.navbar-toggler-icon').click
++        frame = self.page.frame_locator("iframe")  # Ensure the selector is correct
++        frame.locator('.navbar-toggler-icon').click()
++
++
++
+Index: tests/test_iframe.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tests/test_iframe.py b/tests/test_iframe.py
+new file mode 100644
+--- /dev/null	(date 1739119942723)
++++ b/tests/test_iframe.py	(date 1739119942723)
+@@ -0,0 +1,9 @@
++from playwright.sync_api import Page
++from pages.iframe_page import IFramePage
++
++
++def test_iframe(page: Page):
++    iframe_obj = IFramePage(page)
++    iframe_obj.open()
++    iframe_obj.click_on_burger_menu()
++
+Index: pages/select_page.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pages/select_page.py b/pages/select_page.py
+new file mode 100644
+--- /dev/null	(date 1739551753654)
++++ b/pages/select_page.py	(date 1739551753654)
+@@ -0,0 +1,9 @@
++from pages.base_page import BasePage
++
++
++class SelectPage(BasePage):
++    url = 'https://magento.softwaretestingboard.com/men/tops-men.html'
++
++
++    def click_on_Price_selector(self):
++        self.page.locator('#sorter').first.select_option('Price')
+\ No newline at end of file
+Index: tests/test_select.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tests/test_select.py b/tests/test_select.py
+new file mode 100644
+--- /dev/null	(date 1739551753662)
++++ b/tests/test_select.py	(date 1739551753662)
+@@ -0,0 +1,9 @@
++from playwright.sync_api import Page
++from pages.select_page import SelectPage
++
++
++
++def test_select(page: Page):
++    magendo_select = SelectPage(page)
++    magendo_select.open()
++    magendo_select.click_on_Price_selector()
+Index: .idea/PythonProject2.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/PythonProject2.iml b/.idea/PythonProject2.iml
+new file mode 100644
+--- /dev/null	(date 1735661419937)
++++ b/.idea/PythonProject2.iml	(date 1735661419937)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="PYTHON_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/.venv" />
++    </content>
++    <orderEntry type="jdk" jdkName="Python 3.13 (PythonProject2)" jdkType="Python SDK" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
