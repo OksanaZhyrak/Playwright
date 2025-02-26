@@ -10,3 +10,12 @@ def page():
         page.set_viewport_size({'height': 1080, 'width': 1920})
         yield page
         browser.close()
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--slowmoo", action="store", default=None, help="Custom slowmoo argument"
+    )
+
+@pytest.fixture
+def slowmoo(request):
+    return request.config.getoption("--slowmoo")
