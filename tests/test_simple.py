@@ -12,8 +12,9 @@ def test_simple_click(page:Page, slowmoo):
     simple_page.click_button()
     simple_page.check_result_text_is('Submitted')
 
-#def test_with_slowmoo(slowmoo):
-    #assert slowmoo == "3000"
+def test_with_slowmoo(slowmoo):
+    assert slowmoo == "3000"
+    print('Hello')
 
 #def test_with_slowmoo(slowmoo):
     #print(f"Slowmoo value: {slowmoo}")  # Додано для перевірки
