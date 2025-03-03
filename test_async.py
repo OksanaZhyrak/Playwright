@@ -27,3 +27,36 @@ def test_first(page):
     search_button.click()
     expect(page).to_have_title(re.compile('cat', re.IGNORECASE))
 
+def test_dynamic_props(page):
+        page.goto('https://demoqa.com/dynamic-properties')
+        button = page.locator('#visibleAfter')
+        button.click()
+        page.screenshot(type='jpeg', path='shot.jpg')
+
+def test_iframe(page):
+        page.goto('https://www.qa-practice.com/elements/iframe/iframe_page')
+        toggler = page.frames[1].locator('css=.navbar-toggler-icon')
+        toggler.click()
+        page.screenshot(type='jpeg', path='toggler.jpg')
+
+
+def test_drag(page):
+        page.goto('https://www.qa-practice.com/elements/dragndrop/boxes')
+        page.drag_and_drop('#rect-draggable', '#rect-droppable')
+        page.screenshot(type='jpeg', path='drag.jpg')
+
+
+def test_select(page):
+        page.goto('https://www.qa-practice.com/elements/button/disabled')
+        page.locator('#id_select_state').select_option('enabled')
+        page.screenshot(type='jpeg', path='select.jpg')
+
+
+def test_hover(page):
+        page.goto('https://magento.softwaretestingboard.com/')
+        page.locator('#ui-id-4').hover()
+        page.locator('#ui-id-9').hover()
+        page.screenshot(type='jpeg', path='hover.jpg')
+
+
+
