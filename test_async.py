@@ -18,7 +18,7 @@ from pytest_playwright.pytest_playwright import browser
 @pytest.mark.asyncio
 async def test_first():
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         await page.goto('https://www.google.com/')
         await expect(page).to_have_title('Google')
@@ -35,7 +35,7 @@ async def test_first():
 @pytest.mark.asyncio
 async def test_dynamic_props():
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         await page.goto('https://demoqa.com/dynamic-properties')
         button = page.locator('#visibleAfter')
@@ -45,7 +45,7 @@ async def test_dynamic_props():
 @pytest.mark.asyncio
 async def test_iframe():
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         await page.goto('https://www.qa-practice.com/elements/iframe/iframe_page')
         toggler = page.frames[1].locator('css=.navbar-toggler-icon')
@@ -55,7 +55,7 @@ async def test_iframe():
 @pytest.mark.asyncio
 async def test_drag():
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         await page.goto('https://www.qa-practice.com/elements/dragndrop/boxes')
         await page.drag_and_drop('#rect-draggable', '#rect-droppable')
@@ -64,7 +64,7 @@ async def test_drag():
 @pytest.mark.asyncio
 async def test_select():
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         await page.goto('https://www.qa-practice.com/elements/button/disabled')
         await page.locator('#id_select_state').select_option('enabled')
@@ -73,7 +73,7 @@ async def test_select():
 @pytest.mark.asyncio
 async def test_hover():
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         await page.goto('https://magento.softwaretestingboard.com/')
         await page.locator('#ui-id-4').hover()
