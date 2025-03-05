@@ -1,39 +1,29 @@
-name: Playwright example CI
-
+name: Playwright Tests
 on:
   push:
-    branches: [ "master" ]
-  # schedule:
-  #   - cron: "0 8 */10 * *"
-
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 jobs:
   test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-
-    # defaults:
-    #   run:
-    #     working-directory: ./api-tests
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Setup dependancies
-        run: npm i
-
-      - name: Playwright install
-        run: npx playwright install
-
-      - name: Run tests
-        run: npm run test:all
-        # env:
-        #   MY_ENV: "${{ secrets.ENV }}"
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Ensure browsers are installed
+      run: python -m playwright install --with-deps
+    - name: Run your tests
+      run: pytest --tracing=retain-on-failure
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-traces
+        path: test-results/
